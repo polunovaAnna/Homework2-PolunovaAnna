@@ -1,16 +1,102 @@
 <!DOCTYPE html>
-<html>
-<head lang="uk">
+<html lang="uk">
+<head>
     <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Сайт для покупок продуктів онлайн">
     <title>My Page</title>
-
-
     <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
-	<span class="product-item">
-		Apple
-		<span class="amount">4</span>
-	</span>
+	<div class="wrapper">
+		<div class="product-item">
+			<div class="search">
+				<input class="search-item" type="text" placeholder="Назва товару">
+				<button class="add-item tooltip" data-tooltip="Додати товар">Додати</button>
+			</div>
+			<div class="divider"></div>
+			<div class="items">
+				<div class="item-name">
+					<s>Помідори</s>
+				</div>
+				<div class="quantity">
+					<span class="amount">2</span>
+				</div>
+				<div class="actions">
+					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки чи перевірки покупки"
+					style="cursor: not-allowed" disabled>Не куплено</button>
+				</div>
+			</div>
+			<div class="divider"></div>
+			<div class="items">
+				<div class="item-name">
+					Печиво
+				</div>
+				<div class="quantity-buttons">
+					<button class="minus tooltip" data-tooltip="Зменшити кількість товару">-</button>
+					<span class="amount">2</span>
+					<button class="plus tooltip" data-tooltip="Збільшити кількість товару">+</button>
+				</div>
+				<div class="actions buttons">
+					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки чи перевірки покупки">Куплено</button>
+					<button class="remove tooltip" data-tooltip="Прибрати товар з корзини">X</button>
+				</div>
+			</div>
+			<div class="divider"></div>
+			<div class="items">
+				<div class="item-name">
+					<input type="text" class="for-item" placeholder="Сир">
+				</div>
+				<div class="quantity-buttons">
+					<button class="minus tooltip" data-tooltip="Зменшити кількість товару" disabled>-</button>
+					<span class="amount">1</span>
+					<button class="plus tooltip" data-tooltip="Збільшити кількість товару">+</button>
+				</div>
+				<div class="actions buttons">
+					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки чи перевірки покупки">Куплено</button>
+					<button class="remove tooltip" data-tooltip="Прибрати товар з корзини">X</button>
+				</div>
+			</div>
+		</div>
+		<div class="checkout">
+			<h2>Залишилося</h2>
+			<div class="divider"></div>
+			<div class="checkout-items">
+				<span class="check-item">
+					Печиво
+					<span class="check-amount">
+						2
+					</span>
+				</span>
+				<span class="check-item">
+					Сир
+					<span class="check-amount">
+						1
+					</span>
+				</span>
+			</div>
+			<div class="divider"></div>
+			<h2>Куплено</h2>
+			<div class="divider"></div>
+			<div class="checkout-items">
+				<span class="check-item">
+					<s>Помідори</s>
+					<span class="check-amount">
+						<s>2</s>
+					</span>
+				</span>
+			</div>
+		</div>
+		<div class="badge">
+			<div class="badge-inner">
+				<div class="badge-title">Buy List</div>
+				<div class="badge-to-appear">
+					<div class="badge-text">Created by:</div>
+					<div class="badge-author">Polunova Anna</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </body>
 </html>
