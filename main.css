@@ -1,17 +1,376 @@
-.product-item {
-	background-color: gray;
-	display: inline-block;
-	height: 25px;
-	padding: 5px;
+body{
+	background-color: lightgray;
+	margin: 15px;
+}
+
+.wrapper{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+	font-size: 20px;
+	font-family: Georgia, serif;
+}
+
+@media (max-width: 768px){
+	.wrapper{
+		flex-direction: column;
+	}
+	.product-item, .checkout{
+		width: 100%;
+	}
+	.items{
+		flex-direction: column;
+		gap: 10px;
+	}
+	.checkout-items{
+		flex-direction: column;
+	}
+	.check-item{
+		flex-direction: column;
+	}
+}
+
+@media print {
+	.badge {
+		background-color: white;
+		border: 2px solid #4B0082;
+	}
+
+	.badge-title::before {
+		content: "Made by: Polunova Anna";
+		color: black;
+		display: block;
+	}
+
+	.badge-title {
+		color: transparent;
+	}
+
+	.check-item, .amount{
+		border: 2px solid black
+	}
+}
+
+/*
+Екран з покупкою товарів
+ */
+.product-item{
+	background-color: whitesmoke;
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	height: fit-content;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 4px #393E46;
+}
+
+.search{
+	display: flex;
+	width: 100%;
+	align-items: flex-start;
+}
+
+.search-item{
+	flex: 1;
+	font-size: inherit;
+	font-family: inherit;
+	padding: 10px;
+	border: 1px solid lightgray;
+	border-right: none;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.add-item{
+	background-color: #6A7EC8;
+	margin-left: -5px;
+	color: whitesmoke;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	font-size: inherit;
+	font-family: inherit;
+	padding: 10px 20px;
+	box-shadow: 2px 2px 1px #394889;
+	cursor: pointer;
+	border-style: none;
+}
+
+.add-item:hover, .add-item:focus{
+	transform: translateY(1px);
+	background-color: #5569B0;
+}
+
+.items {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 20px;
+}
+
+.item-name{
+	flex: 1;
+}
+
+.quantity{
+	flex: 2;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	justify-content: center;
+}
+
+.quantity-buttons {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	justify-content: center;
+}
+
+.actions{
+	flex: 1;
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+}
+
+.amount{
+	background-color: lightgray;
+	color: #393E46;
+	text-align: center;
+	padding: 5px 10px;
 	border-radius: 5px;
 }
 
-.amount {
-	background-color: yellow;
-	border-radius: 10px;
-	
-	display: inline-block;
-	height: 20px;
-	width: 20px;
+.bought-or-not{
+	background-color: lightgray;
+	color: #393E46;
+	border-radius: 5px;
+	font-size: inherit;
+	font-family: inherit;
+	padding: 10px 20px;
+	box-shadow: 2px 2px 1px #393E46;
+	cursor: pointer;
+	border-style: none;
+}
+
+.bought-or-not:enabled:hover, .bought-or-not:enabled:focus{
+	transform: translateY(1px);
+	background-color: #c0c0c0;
+}
+
+.for-item{
+	font-size: inherit;
+	font-family: inherit;
+	padding: 10px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+}
+
+.plus{
+	background-color: #8A9A4C;
+	color: whitesmoke;
+	font-family: inherit;
+	font-size: inherit;
+	box-shadow: 2px 2px 1px #626F47;
+	cursor: pointer;
+	border-style: none;
+	border-radius: 50%;
+	padding: 0;
+	height: 40px;
+	width: 40px;
 	text-align: center;
 }
+
+.plus:hover, .plus:focus{
+	transform: translateY(1px);
+	background-color: #798942;
+}
+
+.minus{
+	background-color: #D84040;
+	color: whitesmoke;
+	font-family: inherit;
+	font-size: inherit;
+	box-shadow: 2px 2px 1px #A31D1D;
+	cursor: pointer;
+	border-style: none;
+	border-radius: 50%;
+	padding: 0;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+}
+
+.minus:enabled:hover, .minus:enabled:focus{
+	transform: translateY(1px);
+	background-color: #bd3737;
+}
+
+.minus:disabled {
+	background-color: #E4A9A9;
+	color: #fff5f5;
+	box-shadow: none;
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+.remove{
+	background-color: #D84040;
+	color: whitesmoke;
+	font-family: inherit;
+	box-shadow: 2px 2px 1px #A31D1D;
+	cursor: pointer;
+	border-style: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+.remove:hover, .remove:focus{
+	transform: translateY(1px);
+	background-color: #bd3737;
+}
+
+/*
+Екран з кількістю куплених товарів
+ */
+.checkout{
+	background-color: whitesmoke;
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	height: fit-content;
+	border-radius: 5px;
+	padding: 20px;
+	justify-content: center;
+	gap: 20px;
+	box-shadow: 2px 2px 4px #393E46;
+}
+
+.checkout-items{
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	justify-content: left;
+}
+
+.check-item{
+	display: flex;
+	align-items: center;
+	text-align: center;
+	gap: 10px;
+	background-color: lightgray;
+	color: #393E46;
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+.check-amount{
+	border-style: none;
+	border-radius: 50%;
+	height: 35px;
+	width: 35px;
+	color: whitesmoke;
+	background-color: #CA7842;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+
+.checkout h2{
+	margin: 0;
+}
+
+/*
+Шось додаткове (краще переробити на границю)
+ */
+
+.divider {
+	height: 1px;
+	background-color: lightgray;
+	margin: 0 -20px;
+}
+
+.badge {
+	position: fixed;
+	bottom: 0;
+	left: 10px;
+	background-color: #4B0082;
+	color: white;
+	padding: 10px 20px;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+	z-index: 1000;
+	cursor: pointer;
+	transform: translateY(50px);
+	transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.badge-inner{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+	transition: transform 0.3s ease;
+	transform: translateY(0);
+}
+
+.badge-title{
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.badge-to-appear{
+	opacity: 0;
+	transform: translateY(-10px);
+	transition: all 0.3s ease;
+}
+
+.badge-author{
+	font-weight: bold;
+	font-style: italic;
+	font-size: 1.2em;
+}
+
+.badge:hover{
+	background-color: #8A2BE2;
+	transform: translateY(0);
+}
+
+.badge:hover .badge-to-appear{
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.tooltip {
+	position: relative;
+	cursor: pointer;
+}
+
+.tooltip::after {
+	content: attr(data-tooltip);
+	position: absolute;
+	bottom: -35px;
+	left: 50%;
+	transform: translateX(-50%) scale(0.8);
+	background-color: #8A2BE2;
+	color: white;
+	padding: 6px 10px;
+	border-radius: 10px;
+	white-space: nowrap;
+	font-size: 14px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	z-index: 100;
+}
+
+.tooltip:hover::after {
+	opacity: 1;
+	transform: translateX(-50%) scale(1);
+}
+
