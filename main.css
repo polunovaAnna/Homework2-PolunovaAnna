@@ -1,3 +1,29 @@
+:root{
+	--label-with-name-base-color: #4B0082;
+	--label-with-name-change-color: #8A2BE2;
+
+	--shadow-for-white-components: #393E46;
+
+	--add-item-button: #6A7EC8;
+	--add-item-shadow: #394889;
+	--add-item-pressed: #5569B0;
+
+	--bought-or-not-bought-pressed: #c0c0c0;
+
+	--plus-button-base-color: #8A9A4C;
+	--plus-button-shadow-color: #626F47;
+	--plus-button-pressed: #798942;
+
+	--minus-button-and-remove-base-color: #D84040;
+	--minus-button-and-remove-shadow: #A31D1D;
+	--minus-button-and-remove-pressed: #bd3737;
+	--minus-button-and-remove-disabeled: #E4A9A9;
+
+	--amount-base-color: #CA7842;
+
+	--base-white-color: whitesmoke;
+}
+
 body{
 	background-color: lightgray;
 	margin: 15px;
@@ -33,7 +59,7 @@ body{
 @media print {
 	.badge {
 		background-color: white;
-		border: 2px solid #4B0082;
+		border: 2px solid var(--label-with-name-base-color);
 	}
 
 	.badge-title::before {
@@ -55,7 +81,7 @@ body{
 Екран з покупкою товарів
  */
 .product-item{
-	background-color: whitesmoke;
+	background-color: var(--base-white-color);
 	flex: 2;
 	display: flex;
 	flex-direction: column;
@@ -63,7 +89,7 @@ body{
 	height: fit-content;
 	padding: 20px;
 	border-radius: 5px;
-	box-shadow: 2px 2px 4px #393E46;
+	box-shadow: 2px 2px 4px var(--shadow-for-white-components);
 }
 
 .search{
@@ -84,22 +110,22 @@ body{
 }
 
 .add-item{
-	background-color: #6A7EC8;
+	background-color: var(--add-item-button);
 	margin-left: -5px;
-	color: whitesmoke;
+	color: var(--base-white-color);
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 	font-size: inherit;
 	font-family: inherit;
 	padding: 10px 20px;
-	box-shadow: 2px 2px 1px #394889;
+	box-shadow: 2px 2px 1px var(--add-item-shadow);
 	cursor: pointer;
 	border-style: none;
 }
 
 .add-item:hover, .add-item:focus{
 	transform: translateY(1px);
-	background-color: #5569B0;
+	background-color: var(--add-item-pressed);
 }
 
 .items {
@@ -138,7 +164,7 @@ body{
 
 .amount{
 	background-color: lightgray;
-	color: #393E46;
+	color: var(--shadow-for-white-components);
 	text-align: center;
 	padding: 5px 10px;
 	border-radius: 5px;
@@ -146,19 +172,19 @@ body{
 
 .bought-or-not{
 	background-color: lightgray;
-	color: #393E46;
+	color: var(--shadow-for-white-components);
 	border-radius: 5px;
 	font-size: inherit;
 	font-family: inherit;
 	padding: 10px 20px;
-	box-shadow: 2px 2px 1px #393E46;
+	box-shadow: 2px 2px 1px var(--shadow-for-white-components);
 	cursor: pointer;
 	border-style: none;
 }
 
 .bought-or-not:enabled:hover, .bought-or-not:enabled:focus{
 	transform: translateY(1px);
-	background-color: #c0c0c0;
+	background-color: var(--bought-or-not-bought-pressed);
 }
 
 .for-item{
@@ -170,11 +196,11 @@ body{
 }
 
 .plus{
-	background-color: #8A9A4C;
-	color: whitesmoke;
+	background-color: var(--plus-button-base-color);
+	color: var(--base-white-color);
 	font-family: inherit;
 	font-size: inherit;
-	box-shadow: 2px 2px 1px #626F47;
+	box-shadow: 2px 2px 1px var(--plus-button-shadow-color);
 	cursor: pointer;
 	border-style: none;
 	border-radius: 50%;
@@ -186,15 +212,15 @@ body{
 
 .plus:hover, .plus:focus{
 	transform: translateY(1px);
-	background-color: #798942;
+	background-color: var(--plus-button-pressed);
 }
 
 .minus{
-	background-color: #D84040;
-	color: whitesmoke;
+	background-color: var(--minus-button-and-remove-base-color);
+	color: var(--base-white-color);
 	font-family: inherit;
 	font-size: inherit;
-	box-shadow: 2px 2px 1px #A31D1D;
+	box-shadow: 2px 2px 1px var(--minus-button-and-remove-shadow);
 	cursor: pointer;
 	border-style: none;
 	border-radius: 50%;
@@ -206,22 +232,22 @@ body{
 
 .minus:enabled:hover, .minus:enabled:focus{
 	transform: translateY(1px);
-	background-color: #bd3737;
+	background-color: var(--minus-button-and-remove-pressed);
 }
 
 .minus:disabled {
-	background-color: #E4A9A9;
-	color: #fff5f5;
+	background-color: var(--minus-button-and-remove-disabeled);
+	color: var(--base-white-color);
 	box-shadow: none;
 	cursor: not-allowed;
 	opacity: 0.7;
 }
 
 .remove{
-	background-color: #D84040;
-	color: whitesmoke;
+	background-color: var(--minus-button-and-remove-base-color);
+	color: var(--base-white-color);
 	font-family: inherit;
-	box-shadow: 2px 2px 1px #A31D1D;
+	box-shadow: 2px 2px 1px var(--minus-button-and-remove-shadow);
 	cursor: pointer;
 	border-style: none;
 	padding: 10px 20px;
@@ -231,14 +257,14 @@ body{
 
 .remove:hover, .remove:focus{
 	transform: translateY(1px);
-	background-color: #bd3737;
+	background-color: var(--minus-button-and-remove-pressed);
 }
 
 /*
 Екран з кількістю куплених товарів
  */
 .checkout{
-	background-color: whitesmoke;
+	background-color: var(--base-white-color);
 	flex: 1;
 	display: flex;
 	flex-wrap: wrap;
@@ -248,7 +274,7 @@ body{
 	padding: 20px;
 	justify-content: center;
 	gap: 20px;
-	box-shadow: 2px 2px 4px #393E46;
+	box-shadow: 2px 2px 4px var(--shadow-for-white-components);
 }
 
 .checkout-items{
@@ -264,7 +290,7 @@ body{
 	text-align: center;
 	gap: 10px;
 	background-color: lightgray;
-	color: #393E46;
+	color: var(--shadow-for-white-components);
 	padding: 10px 20px;
 	border-radius: 5px;
 }
@@ -274,8 +300,8 @@ body{
 	border-radius: 50%;
 	height: 35px;
 	width: 35px;
-	color: whitesmoke;
-	background-color: #CA7842;
+	color: var(--base-white-color);
+	background-color: var(--amount-base-color);
 	align-items: center;
 	justify-content: center;
 	display: flex;
@@ -299,8 +325,8 @@ body{
 	position: fixed;
 	bottom: 0;
 	left: 10px;
-	background-color: #4B0082;
-	color: white;
+	background-color: var(--label-with-name-base-color);
+	color: var(--base-white-color);
 	padding: 10px 20px;
 	border-top-right-radius: 15px;
 	border-top-left-radius: 15px;
@@ -337,7 +363,7 @@ body{
 }
 
 .badge:hover{
-	background-color: #8A2BE2;
+	background-color: var(--label-with-name-change-color);
 	transform: translateY(0);
 }
 
@@ -357,8 +383,8 @@ body{
 	bottom: -35px;
 	left: 50%;
 	transform: translateX(-50%) scale(0.8);
-	background-color: #8A2BE2;
-	color: white;
+	background-color: var(--label-with-name-change-color);
+	color: var(--base-white-color);
 	padding: 6px 10px;
 	border-radius: 10px;
 	white-space: nowrap;
