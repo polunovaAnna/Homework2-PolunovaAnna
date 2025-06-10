@@ -6,6 +6,7 @@
 	<meta name="description" content="Сайт для покупок продуктів онлайн">
     <title>My Page</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
+	<script src="logic.js" defer></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -17,14 +18,16 @@
 			<div class="divider"></div>
 			<div class="items">
 				<div class="item-name">
-					<s>Помідори</s>
+					Помідори
 				</div>
 				<div class="quantity-buttons">
-					<span class="amount">2</span>
+					<button class="minus tooltip" data-tooltip="Зменшити кількість товару">-</button>
+					<span class="amount">5</span>
+					<button class="plus tooltip" data-tooltip="Збільшити кількість товару">+</button>
 				</div>
-				<div class="actions">
-					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки чи перевірки покупки"
-					style="cursor: not-allowed" disabled>Не куплено</button>
+				<div class="actions buttons">
+					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки товару">Куплено</button>
+					<button class="remove tooltip" data-tooltip="Прибрати товар з корзини">X</button>
 				</div>
 			</div>
 			<div class="divider"></div>
@@ -38,14 +41,14 @@
 					<button class="plus tooltip" data-tooltip="Збільшити кількість товару">+</button>
 				</div>
 				<div class="actions buttons">
-					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки чи перевірки покупки">Куплено</button>
+					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки товару">Куплено</button>
 					<button class="remove tooltip" data-tooltip="Прибрати товар з корзини">X</button>
 				</div>
 			</div>
 			<div class="divider"></div>
 			<div class="items">
 				<div class="item-name">
-					<input type="text" class="for-item" placeholder="Сир">
+					Сир
 				</div>
 				<div class="quantity-buttons">
 					<button class="minus tooltip" data-tooltip="Зменшити кількість товару" disabled>-</button>
@@ -53,38 +56,65 @@
 					<button class="plus tooltip" data-tooltip="Збільшити кількість товару">+</button>
 				</div>
 				<div class="actions buttons">
-					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки чи перевірки покупки">Куплено</button>
+					<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки товару">Куплено</button>
 					<button class="remove tooltip" data-tooltip="Прибрати товар з корзини">X</button>
 				</div>
 			</div>
+			<template id="addedItem">
+				<div class="items">
+					<div class="item-name">
+						Назва товару
+					</div>
+					<div class="quantity-buttons">
+						<button class="minus tooltip" data-tooltip="Зменшити кількість товару" disabled>-</button>
+						<span class="amount">1</span>
+						<button class="plus tooltip" data-tooltip="Збільшити кількість товару">+</button>
+					</div>
+					<div class="actions buttons">
+						<button class="bought-or-not tooltip" data-tooltip="Кнопка для покупки товару">Куплено</button>
+						<button class="remove tooltip" data-tooltip="Прибрати товар з корзини">X</button>
+					</div>
+				</div>
+			</template>
 		</div>
-		<div class="checkout">
-			<h2>Залишилося</h2>
-			<div class="divider"></div>
-			<div class="checkout-items">
-				<span class="check-item">
-					Печиво
-					<span class="check-amount">
-						2
+		<div class="checkout-container">
+			<div class="checkout">
+				<h2>Залишилося</h2>
+				<div class="divider"></div>
+				<div class="checkout-items">
+					<span class="check-item">
+						Помідори
+						<span class="check-amount">
+							5
+						</span>
 					</span>
-				</span>
-				<span class="check-item">
-					Сир
-					<span class="check-amount">
-						1
+					<span class="check-item">
+						Печиво
+						<span class="check-amount">
+							2
+						</span>
 					</span>
-				</span>
+					<span class="check-item">
+						Сир
+						<span class="check-amount">
+							1
+						</span>
+					</span>
+					<template id="checkoutItem">
+						<span class="check-item">
+						Назва товару
+						<span class="check-amount">
+							1
+						</span>
+					</span>
+					</template>
+				</div>
 			</div>
-			<div class="divider"></div>
-			<h2>Куплено</h2>
-			<div class="divider"></div>
-			<div class="checkout-items">
-				<span class="check-item">
-					<s>Помідори</s>
-					<span class="check-amount">
-						<s>2</s>
-					</span>
-				</span>
+			<div class="checkout">
+				<div class="divider"></div>
+				<h2>Куплено</h2>
+				<div class="divider"></div>
+				<div class="checkout-items"></div>
 			</div>
 		</div>
 		<div class="badge">
@@ -96,7 +126,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

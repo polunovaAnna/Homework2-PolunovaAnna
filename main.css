@@ -144,12 +144,16 @@ body{
 	min-width: 0;
 }
 
-.quantity{
-	flex: 2;
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	justify-content: center;
+.edit-name-input {
+	font-size: inherit;
+	font-family: inherit;
+	flex: 2 1 0;
+	border: 1px solid lightgray;
+	padding: 0;
+	box-sizing: border-box;
+	width: 100%;
+	height: 1.4em;
+	overflow: hidden;
 }
 
 .quantity-buttons {
@@ -269,7 +273,8 @@ body{
 /*
 Екран з кількістю куплених товарів
  */
-.checkout{
+
+.checkout-container{
 	background-color: var(--base-white-color);
 	flex: 1;
 	display: flex;
@@ -283,9 +288,21 @@ body{
 	box-shadow: 2px 2px 4px var(--shadow-for-white-components);
 }
 
+.checkout{
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	height: fit-content;
+	justify-content: center;
+	gap: 20px;
+
+}
+
 .checkout-items{
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	gap: 20px;
 	justify-content: left;
 }
