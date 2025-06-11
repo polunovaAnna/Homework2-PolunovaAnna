@@ -3,8 +3,8 @@ const addButton = document.querySelector(".add-item");
 const itemsBlock = document.querySelector(".product-item");
 
 const products = [
-    { itemName: "помідори", amount: 1, bought: false },
-    { itemName: "печиво", amount: 1, bought: false },
+    { itemName: "помідори", amount: 5, bought: false },
+    { itemName: "печиво", amount: 2, bought: false },
     { itemName: "сир", amount: 1, bought: false }
 ];
 
@@ -35,6 +35,8 @@ itemsBlock.addEventListener("click", (e) => {
 function addItem() {
     const inputValue = input.value.trim();
     if (inputValue === ""){
+        input.value = '';
+        input.focus();
         return;
     }
 
@@ -49,8 +51,8 @@ function addItem() {
     const newProduct = {itemName: inputValue, amount: 1, bought: false};
     products.push(newProduct);
 
-    renderItem(newProduct);
-    addToSidebar(newProduct);
+    showNewItem(newProduct);
+    addToCheckout(newProduct);
 
     input.value = '';
     input.focus();
@@ -72,7 +74,7 @@ function removeItem(e) {
         products.splice(index, 1);
     }
 
-    removeFromSidebar(itemName);
+    removeFromCheckout(itemName);
 }
 
 function buyItem(e) {
@@ -91,7 +93,6 @@ function buyItem(e) {
     const button = e.target;
 
     if (isBought) {
-        item.classList.add("bought");
         item.querySelector(".item-name").style.textDecoration = "line-through";
         button.textContent = "Не куплено";
 
@@ -101,7 +102,6 @@ function buyItem(e) {
 
         moveToBought(itemName, product.amount);
     } else {
-        item.classList.remove("bought");
         item.querySelector(".item-name").style.textDecoration = "none";
         button.textContent = "Куплено";
 
@@ -118,20 +118,20 @@ function buyItem(e) {
 function increaseAmount(e) {
     const item = e.target.closest(".items");
     const itemName = item.querySelector(".item-name").textContent.trim();
-    const product = products.find(p => p.itemName.toLowerCase() === itemName.toLowerCase());
+    const product = products.find(products => products.itemName.toLowerCase() === itemName.toLowerCase());
 
-    const amountSpan = item.querySelector(".amount");
-    const current = parseInt(amountSpan.textContent.trim(), 10);
+    const currentAmount = item.querySelector(".amount");
+    const current = parseInt(currentAmount.textContent.trim(), 10);
     product.amount = current + 1;
 
-    amountSpan.textContent = product.amount;
+    currentAmount.textContent = product.amount;
 
     const minusBtn = item.querySelector(".minus");
     if (product.amount > 1){
         minusBtn.disabled = false;
     }
 
-    updateSidebar(product.itemName, product.amount);
+    updateCheckout(product.itemName, product.amount);
 }
 
 function decreaseAmount(e) {
@@ -148,12 +148,14 @@ function decreaseAmount(e) {
     }
 
     const minusBtn = item.querySelector(".minus");
-    minusBtn.disabled = product.amount <= 1;
+    if(product.amount<=1){
+        minusBtn.disabled = true;
+    }
 
-    updateSidebar(product.itemName, product.amount);
+    updateCheckout(product.itemName, product.amount);
 }
 
-function addToSidebar(product) {
+function addToCheckout(product) {
     const remainingSection = document.querySelectorAll(".checkout-items")[0];
     const template = document.getElementById("checkoutItem");
 
@@ -167,7 +169,7 @@ function addToSidebar(product) {
 }
 
 
-function updateSidebar(itemName, newAmount) {
+function updateCheckout(itemName, newAmount) {
     const checkItems = document.querySelectorAll(".check-item");
 
     for (const checkItem of checkItems) {
@@ -179,40 +181,28 @@ function updateSidebar(itemName, newAmount) {
     }
 }
 
-function updateSidebarStats() {
-    const remainingSection = document.querySelectorAll(".checkout-items")[0];
-    const boughtSection = document.querySelectorAll(".checkout-items")[1];
-
-    remainingSection.innerHTML = '';
-    boughtSection.innerHTML = '';
-
-    for (const product of products) {
-        const template = document.getElementById("checkoutItem");
-        const clone = template.content.cloneNode(true);
-        const newItem = clone.querySelector(".check-item");
-
-        newItem.childNodes[0].textContent = product.itemName;
-        newItem.querySelector(".check-amount").textContent = product.amount;
-
-        if (product.bought) {
-            boughtSection.appendChild(newItem);
-        } else {
-            remainingSection.appendChild(newItem);
+function updateCheckoutItemName(oldName, newName) {
+    const checkItems = document.querySelectorAll(".check-item");
+    for (const checkItem of checkItems) {
+        const name = checkItem.childNodes[0].textContent.trim().toLowerCase();
+        if (name === oldName.toLowerCase()) {
+            checkItem.childNodes[0].textContent = newName;
+            break;
         }
     }
 }
 
 function moveToBought(name, amount) {
     const boughtSection = document.querySelectorAll(".checkout-items")[1];
-    moveSidebarItem(name, amount, boughtSection);
+    moveCheckoutItem(name, amount, boughtSection);
 }
 
 function moveToRemaining(name, amount) {
     const remainingSection = document.querySelectorAll(".checkout-items")[0];
-    moveSidebarItem(name, amount, remainingSection);
+    moveCheckoutItem(name, amount, remainingSection);
 }
 
-function moveSidebarItem(name, amount, targetSection) {
+function moveCheckoutItem(name, amount, targetSection) {
     const allItems = document.querySelectorAll(".check-item");
 
     for (const item of allItems) {
@@ -232,7 +222,7 @@ function moveSidebarItem(name, amount, targetSection) {
     targetSection.appendChild(newItem);
 }
 
-function removeFromSidebar(itemName) {
+function removeFromCheckout(itemName) {
     const checkItems = document.querySelectorAll(".check-item");
     for (const item of checkItems) {
         const name = item.childNodes[0].textContent.trim().toLowerCase();
@@ -243,7 +233,7 @@ function removeFromSidebar(itemName) {
     }
 }
 
-function renderItem(product) {
+function showNewItem(product) {
     const itemsBlock = document.querySelector(".product-item");
     const template = document.getElementById("addedItem");
     const divider = document.createElement("div");
@@ -264,74 +254,59 @@ function renderItem(product) {
     itemsBlock.appendChild(clone);
 }
 
-function enableItemNameEditing(nameDiv) {
-    const oldName = nameDiv.textContent.trim();
-    const product = products.find(products => products.itemName.toLowerCase() === oldName.toLowerCase());
-    if (!product || product.bought) return;
+function enableItemNameEditing(nameField) {
+    const oldName = nameField.textContent.trim();
+    const product = products.find(p => p.itemName.toLowerCase() === oldName.toLowerCase());
+
+    if (!product || product.bought) {
+        return;
+    }
 
     const input = document.createElement("input");
     input.type = "text";
     input.value = oldName;
     input.className = "edit-name-input";
 
-    let isEditing = true;
+    nameField.replaceWith(input);
+    input.focus();
 
-    const finishEdit = (save) => {
-        if (!isEditing){
-            return;
-        }
-        isEditing = false;
-
-        const newName = input.value.trim();
-
-        if (save) {
-            if (!newName) {
-                alert("Назва не може бути порожньою!");
-                isEditing = true;
-                input.focus();
-                return;
-            }
-
-            const isDuplicate = products.some(p => p !== product && p.itemName.toLowerCase() === newName.toLowerCase());
-            if (isDuplicate) {
-                alert("Такий товар уже є у списку!!!");
-                isEditing = true;
-                input.focus();
-                return;
-            }
-
-            product.itemName = newName;
-            nameDiv.textContent = newName;
-
-            const checkItems = document.querySelectorAll(".check-item");
-            for (const checkItem of checkItems) {
-                const name = checkItem.childNodes[0].textContent.trim().toLowerCase();
-                if (name === oldName.toLowerCase()) {
-                    checkItem.childNodes[0].textContent = newName;
-                    break;
-                }
-            }
-        }
-
-        input.replaceWith(nameDiv);
-    };
-
-    input.addEventListener("keydown", (e) => {
+    input.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
-            finishEdit(true);
-        } else if (e.key === "Escape") {
-            finishEdit(false);
+            saveEdit(input, nameField, product, oldName);
         }
     });
 
     input.addEventListener("blur", () => {
-        finishEdit(false);
+        cancelEdit(input, nameField);
     });
-
-    nameDiv.replaceWith(input);
-    input.focus();
 }
 
+function saveEdit(input, nameField, product, oldName) {
+    const newName = input.value.trim();
 
+    if (!newName) {
+        alert("Назва не може бути порожньою!");
+        input.value = '';
+        input.focus();
+        return;
+    }
 
+    const isDuplicate = products.some(products => products !== product && products.itemName.toLowerCase() === newName.toLowerCase());
+    if (isDuplicate) {
+        alert("Такий товар уже є у списку!");
+        input.value = '';
+        input.focus();
+        return;
+    }
 
+    product.itemName = newName;
+    nameField.textContent = newName;
+
+    updateCheckoutItemName(oldName, newName);
+
+    input.replaceWith(nameField);
+}
+
+function cancelEdit(input, nameField) {
+    input.replaceWith(nameField);
+}
