@@ -40,7 +40,13 @@ function addItem() {
         return;
     }
 
-    const exists = products.some(products => products.itemName.toLowerCase() === inputValue.toLowerCase());
+    let exists = false;
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].itemName.toLowerCase() === inputValue.toLowerCase()) {
+            exists = true;
+            break;
+        }
+    }
     if (exists) {
         alert("Такий товар уже є у списку!!!");
         input.value = '';
@@ -63,13 +69,20 @@ function removeItem(e) {
     const itemName = item.querySelector(".item-name").textContent.trim();
 
     const divider = item.previousElementSibling;
-    if (divider && divider.classList.contains("divider")) {
+    if (divider.classList.contains("divider")) {
         divider.remove();
     }
 
     item.remove();
 
-    const index = products.findIndex(products => products.itemName.toLowerCase() === itemName.toLowerCase());
+    let index = -1;
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].itemName.toLowerCase() === itemName.toLowerCase()) {
+            index=i;
+            break;
+        }
+    }
+
     if (index !== -1){
         products.splice(index, 1);
     }
@@ -121,7 +134,7 @@ function increaseAmount(e) {
     const product = products.find(products => products.itemName.toLowerCase() === itemName.toLowerCase());
 
     const currentAmount = item.querySelector(".amount");
-    const current = parseInt(currentAmount.textContent.trim(), 10);
+    const current = parseInt(currentAmount.textContent, 10);
     product.amount = current + 1;
 
     currentAmount.textContent = product.amount;
@@ -137,10 +150,10 @@ function increaseAmount(e) {
 function decreaseAmount(e) {
     const item = e.target.closest(".items");
     const itemName = item.querySelector(".item-name").textContent.trim();
-    const product = products.find(p => p.itemName.toLowerCase() === itemName.toLowerCase());
+    const product = products.find(products => products.itemName.toLowerCase() === itemName.toLowerCase());
 
     const amountSpan = item.querySelector(".amount");
-    const current = parseInt(amountSpan.textContent.trim(), 10);
+    const current = parseInt(amountSpan.textContent, 10);
 
     if (current > 1) {
         product.amount = current - 1;
